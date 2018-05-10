@@ -1,7 +1,7 @@
 // La URL raiz para los servicios RESTful
 var rootURL = "rest/hotels";
 
-var vinoActual;
+var actualHotel;
 
 // Recuperar la lista de vinos cuando la aplicacion inicia 
 findAll();
@@ -10,7 +10,7 @@ findAll();
 $('#btnDelete').hide();
 
 // Registrar los listeners
-$('.btnBusqueda').click(function() {
+$('.btnSearch').click(function() {
 	//$('#campoBusqueda').trigger('keyup');
 	search($('#campoBusqueda').val());
 	return false;
@@ -26,29 +26,29 @@ $('#campoBusqueda').keypress(function(e){
 });
 
 $('.new').click(function() {
-	newVino();
+	newHotel();
 	return false;
 });
 
 $('#btnSave').click(function() {
 	if ($('#vinoId').val() == '')
-		addVino();
+		addHotel();
 	else
-		updateVino();
+		updateHotel();
 	return false;
 });
 
 $('#btnDelete').click(function() {
-	deleteVino();
+	deleteHotel();
 	return false;
 });
 
-$('#listaVinos').delegate('a', 'click', function() {
+$('#listHotels').delegate('a', 'click', function() {
 	findById($(this).data('identity'));
 });
 
 $("img").error(function(){
-  $(this).attr("src", "pics/generic.jpg");
+  $(this).attr("src", "img/default.jpg");
 
 });
 
@@ -59,11 +59,11 @@ function search(searchKey) {
 		findByName(searchKey);
 }
 
-function newVino() {
+function newHotel() {
 	$('#btnDelete').hide();
-	vinoActual = { imagen: 'generic.jpg'};
-	renderDetails(vinoActual); // Mostrar formulario vacio
-	$('#nombre').focus();
+	actualHotel = { image: 'default.jpg'};
+	renderDetails(actualHotel); // Mostrar formulario vacio
+	$('#name').focus();
 }
 
 function findAll() {
@@ -95,14 +95,14 @@ function findById(id) {
 		success: function(data){
 			$('#btnDelete').show();
 			console.log('findById success: ' + data.name);
-			vinoActual = data;
-			renderDetails(vinoActual);
+			actualHotel = data;
+			renderDetails(actualHotel);
 		}
 	});
 }
 
-function addVino() {
-	console.log('addVino');
+function addHotel() {
+	console.log('addHotel');
 	$.ajax({
 		type: 'POST',
 		contentType: 'application/json',
@@ -111,9 +111,9 @@ function addVino() {
 		data: formToJSON(),
 		success: function(data, textStatus, jqXHR){
 			findAll();
-			alert('Vino creado correctamente');
+			alert('Hotel creado correctamente');
 			$('#btnDelete').show();
-			$('#vinoId').val(data.id);
+			$('#idHotel').val(data.id);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('Error en addVino: ' + textStatus);
@@ -121,8 +121,8 @@ function addVino() {
 	});
 }
 
-function updateVino() {
-	console.log('updateVino');
+function updateHotel() {
+	console.log('updateHotel');
 	$.ajax({
 		type: 'PUT',
 		contentType: 'application/json',
@@ -130,26 +130,26 @@ function updateVino() {
 		dataType: "json",
 		data: formToJSON(),
 		success: function(data, textStatus, jqXHR){			
-			alert('Vino actualizado correctamente');
+			alert('Hotel actualizado correctamente');
 		},
 		error: function(jqXHR, textStatus, errorThrown){
-			alert('Error en updateVino: ' + textStatus);
+			alert('Error en updateHotel: ' + textStatus);
 		}
 	});
 }
 
-function deleteVino() {
-	console.log('deleteVino');
+function deleteHotel() {
+	console.log('deleteHotel');
 	$.ajax({
 		type: 'DELETE',
-		url: rootURL + '/' + $('#vinoId').val(),
+		url: rootURL + '/' + $('#idHotel').val(),
 		success: function(data, textStatus, jqXHR){
 			findAll();
 			renderDetails({});
-			alert('Vino eliminado correctamente');
+			alert('Hotel eliminado correctamente');
 		},
 		error: function(jqXHR, textStatus, errorThrown){
-			alert('Error en deleteVino');
+			alert('Error en deleteHotel');
 		}
 	});
 }
@@ -161,34 +161,30 @@ function renderList(data) {
 				[] : 
 					(data instanceof Array ? data : [data]);
 
-	$('#listaVinos li').remove();
+	$('#listHotels a').remove();
 	$.each(list, function(index, vino) {
-		$('#listaVinos').append('<li><a href="#" data-identity="' + vino.id + '">'+vino.nombre+'</a></li>');
+		$('#listHotels').append('<a href="#" data-identity="' + hotel.id + '" class="list-group-item">'+ hotel.name +'</a>');
 	});
 }
 
-function renderDetails(vino) {
-	$('#vinoId').val(vino.id);
-	$('#nombre').val(vino.nombre);
-	$('#uvas').val(vino.uvas);
-	$('#pais').val(vino.pais);
-	$('#region').val(vino.region);
-	$('#anyo').val(vino.anyo);
-	$('#imagen').attr('src', 'pics/' + vino.imagen);
-	$('#descripcion').val(vino.descripcion);
+function renderDetails(hotel) {
+	$('#idHotel').val(hotel.id);
+	$('#nameHotel').val(hotel.name);
+	$('#starsHotel').val(hotel.stars);
+	$('#countryHotel').val(hotel.country);
+	$('#descripHotel').val(hotel.description);
+	$('#image').attr('src', 'img/' + hotel.image);
 }
 
 // Funcion de ayuda para serializar todos los campos del formulario a strings de JSON
 function formToJSON() {
-	var vinoId = $('#vinoId').val();
+	var idHotel = $('#idHotel').val();
 	return JSON.stringify({
-		"id": vinoId == "" ? null : vinoId, 
-		"nombre": $('#nombre').val(), 
-		"uvas": $('#uvas').val(),
-		"pais": $('#pais').val(),
-		"region": $('#region').val(),
-		"anyo": $('#anyo').val(),
-		"imagen": vinoActual.imagen,
-		"descripcion": $('#descripcion').val()
+		"id": idHotel == "" ? null : idHotel, 
+		"name": $('#nameHotel').val(), 
+		"stars": $('#starsHotel').val(),
+		"country": $('#countryHotel').val(),
+		"description": $('#descripHotel').val(),
+		"image": actualHotel.image,
 		});
 }

@@ -11,32 +11,31 @@
 <body>
         <div class="header" style="float:right;margin-right:15px;   ">
             <input type="text" id="campoBusqueda" />
-            <button class="btnBusqueda btn btn-primary">Buscar</button>
+            <button class="btnSearch btn btn-primary">Buscar</button>
             <button class="new btn btn-primary">Nuevo Hotel</button>
         </div>
 
         <div class="areaLista">
-            <div class="list-group">
-                <a href="#" class="list-group-item active">First item</a>
-                <a href="#" class="list-group-item">Second item</a>
-                <a href="#" class="list-group-item">Third item</a>
+            <div class="listHotels list-group">
+                
             </div>
         </div>
 
         <form>
             <div class="areaDetalle">
-                <label>Id:</label><br>
+                <label for="idHotel">Id:</label><br>
                 <input id="idHotel" name="id" disabled />
 
-                <br><label>Name:</label><br>
+                <br><label for="nameHotel">Name:</label><br>
                 <input id="nameHotel" name="name" required />
 
-                <br><label>Stars:</label><br>
-                <input id="starsHotel" name="stars" />
+                <br><label for="starsHotel">Stars:</label><br>
+                <input id="starsHotel" name="stars" type="number" max="5" min="0"/>
 
-                <br><label>Country:</label><br>
+                <br><label for="countryHotel">Country:</label><br>
                 <input id="countryHotel" name="county" />
-                <br><label>Descripcion:</label>
+                
+                <br><label for="descripHotel">Description:</label>
                 <textarea id="descripHotel" name="descripcion"></textarea>
 
                 <br/>
@@ -45,7 +44,7 @@
             </div> 
 
             <div class="areaImagen">
-                <img id="imagen" height="300"/>
+                <img id="image" height="300"/>
             </div>
         </form>
 <script src="js/bootstrap.bundle.js"></script>

@@ -11,7 +11,7 @@ public class Hotel {
 
 	private String address;
 
-	private String stars;
+	private int stars;
 
 	private String country;
 
@@ -43,11 +43,11 @@ public class Hotel {
 		this.address = address;
 	}
 
-	public String getStars() {
+	public int getStars() {
 		return stars;
 	}
 
-	public void setStars(String stars) {
+	public void setStars(int stars) {
 		this.stars = stars;
 	}
 
