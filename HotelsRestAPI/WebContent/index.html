@@ -9,7 +9,45 @@
 <link rel="stylesheet" href="css/custom.css" />
 </head>
 <body>
-Hotels
+        <div class="header" style="float:right;margin-right:15px;   ">
+            <input type="text" id="campoBusqueda" />
+            <button class="btnBusqueda btn btn-primary">Buscar</button>
+            <button class="new btn btn-primary">Nuevo Hotel</button>
+        </div>
+
+        <div class="areaLista">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+            </div>
+        </div>
+
+        <form>
+            <div class="areaDetalle">
+                <label>Id:</label><br>
+                <input id="idHotel" name="id" disabled />
+
+                <br><label>Name:</label><br>
+                <input id="nameHotel" name="name" required />
+
+                <br><label>Stars:</label><br>
+                <input id="starsHotel" name="stars" />
+
+                <br><label>Country:</label><br>
+                <input id="countryHotel" name="county" />
+                <br><label>Descripcion:</label>
+                <textarea id="descripHotel" name="descripcion"></textarea>
+
+                <br/>
+                <button id="btnSave" class="save btn btn-primary">Guardar</button>			
+                <button id="btnDelete" class="remove btn btn-primary">Eliminar</button>		
+            </div> 
+
+            <div class="areaImagen">
+                <img id="imagen" height="300"/>
+            </div>
+        </form>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/jquery-3.2.1.js"></script>
