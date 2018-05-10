@@ -31,7 +31,7 @@ $('.new').click(function() {
 });
 
 $('#btnSave').click(function() {
-	if ($('#vinoId').val() == '')
+	if ($('#idHotel').val() == '')
 		addHotel();
 	else
 		updateHotel();
@@ -63,7 +63,7 @@ function newHotel() {
 	$('#btnDelete').hide();
 	actualHotel = { image: 'default.jpg'};
 	renderDetails(actualHotel); // Mostrar formulario vacio
-	$('#name').focus();
+	$('#nameHotel').focus();
 }
 
 function findAll() {
@@ -116,7 +116,7 @@ function addHotel() {
 			$('#idHotel').val(data.id);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
-			alert('Error en addVino: ' + textStatus);
+			alert('Error en addHotel: ' + textStatus);
 		}
 	});
 }
