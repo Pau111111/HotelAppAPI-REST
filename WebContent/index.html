@@ -23,28 +23,26 @@
 
         <form>
             <div class="areaDetalle">
-                <label for="idHotel">Id:</label><br>
-                <input id="idHotel" name="id" disabled />
-
-                <br><label for="nameHotel">Name:</label><br>
-                <input id="nameHotel" name="name" required />
-
-                <br><label for="starsHotel">Stars:</label><br>
-                <input id="starsHotel" name="stars" type="number" max="5" min="0"/>
-
-                <br><label for="countryHotel">Country:</label><br>
-                <input id="countryHotel" name="county" />
-                
-                <br><label for="descripHotel">Description:</label>
-                <textarea id="descripHotel" name="descripcion"></textarea>
-
-                <br/>
+               <input id="idHotel" name="id" placeholder="id" style="width:250px;" disabled/>
+               <br>
+               <br>
+               <input id="nameHotel" name="name" placeholder="name" style="width:250px;" required />
+               <br>
+               <br>
+               <input id="starsHotel" name="stars" placeholder="stars" type="number" max="5" min="0" style="width:250px;" />
+                <br>
+                <br>
+               <input id="countryHotel" name="county"  placeholder="country" style="width:250px;" />
+                <br>
+                <br>
+               <textarea id="descripHotel" name="descripcion" placeholder="description" style="width:250px;" ></textarea>
+                <br>
                 <button id="btnSave" class="save btn btn-primary">Guardar</button>			
                 <button id="btnDelete" class="remove btn btn-primary">Eliminar</button>		
-            </div> 
+            </div>
 
             <div class="areaImagen">
-                <img id="image" height="300"/>
+                <img id="image" style="width: 100%;"/>
             </div>
         </form>
 <script src="js/bootstrap.bundle.js"></script>
