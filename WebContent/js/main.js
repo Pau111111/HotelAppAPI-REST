@@ -47,9 +47,13 @@ $('#listHotels').delegate('a', 'click', function() {
 	findById($(this).data('identity'));
 });
 
-$("img").error(function(){
-  $(this).attr("src", "img/default.jpg");
+$('#listHotels').delegate('a', 'click', function() {
+	$('#listHotels a').removeClass("active");
+	$(this).addClass("active");
+});
 
+$("image").error(function(){
+  $(this).attr("src", "img/default.jpg");
 });
 
 function search(searchKey) {
@@ -103,6 +107,7 @@ function findById(id) {
 
 function addHotel() {
 	console.log('addHotel');
+	
 	$.ajax({
 		type: 'POST',
 		contentType: 'application/json',
@@ -155,14 +160,14 @@ function deleteHotel() {
 }
 
 function renderList(data) {
+	console.log("renderList");
 	// JAX-RS serializa una lista vacia como null, y una coleccion de un único elemento en lugar de un array de uno)
 	var list = 
-		data == null ? 
-				[] : 
-					(data instanceof Array ? data : [data]);
+		data == null ? [] : (data instanceof Array ? data : [data]);
 
 	$('#listHotels a').remove();
 	$.each(list, function(index, hotel) {
+		console.log(hotel.id);
 		$('#listHotels').append('<a href="#" data-identity="' + hotel.id + '" class="list-group-item">'+ hotel.name +'</a>');
 	});
 }

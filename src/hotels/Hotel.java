@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Hotel {
 	
-	private int id_hotel;
+	private int id;
 
 	private String name;
 
@@ -19,12 +19,12 @@ public class Hotel {
 
 	private String image;
 
-	public int getId_hotel() {
-		return id_hotel;
+	public int getId() {
+		return id;
 	}
 
-	public void setId_hotel(int id_hotel) {
-		this.id_hotel = id_hotel;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -49,7 +49,7 @@ public class HotelService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Hotel update(Hotel hotel, @PathParam("id") int id) {		
 		System.out.println("Updating hotel: " + hotel.getName());
-		hotel.setId_hotel(id);
+		hotel.setId(id);
 		dao.save(hotel);
 		return hotel;
 	}

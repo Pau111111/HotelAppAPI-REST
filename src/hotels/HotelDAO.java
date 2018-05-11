@@ -52,7 +52,7 @@ public class HotelDAO {
 	}
 
 	public Hotel findById(int id) {
-		String sql = "SELECT * FROM hotels WHERE id_hotel = ?";
+		String sql = "SELECT * FROM hotels WHERE id = ?";
 		Hotel hotel = null;
 		Connection conn = null;
 		try {
@@ -73,14 +73,14 @@ public class HotelDAO {
 	}
 
 	public Hotel save(Hotel hotel) {
-		return hotel.getId_hotel() > 0 ? update(hotel) : create(hotel);
+		return hotel.getId() > 0 ? update(hotel) : create(hotel);
 	}
 
 	public Hotel create(Hotel hotel) {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		final String qry = "INSERT INTO hotels (name, address, stars, country, " + "description, image) "
-				+ "VALUES (?, ?, ?, ?, ?,?)";
+		final String qry = "INSERT INTO hotels (name, address, stars, country, description, image) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		try {
 			conn = ConnectionHelper.getConnection();
 			ps = conn.prepareStatement(qry, new String[] { "ID" });
@@ -96,7 +96,7 @@ public class HotelDAO {
 			// Actualizar el id del objeto que se devuelve. Esto es importante
 			// ya que este valor debe ser devuelto al cliente.
 			int id = rs.getInt(1);
-			hotel.setId_hotel(id);
+			hotel.setId(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -119,7 +119,7 @@ public class HotelDAO {
 			ps.setString(4, hotel.getCountry());
 			ps.setString(5, hotel.getDescription());
 			ps.setString(6, hotel.getImage());
-			ps.setInt(7, hotel.getId_hotel());
+			ps.setInt(7, hotel.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -134,7 +134,7 @@ public class HotelDAO {
 		Connection conn = null;
 		try {
 			conn = ConnectionHelper.getConnection();
-			PreparedStatement ps = conn.prepareStatement("DELETE FROM hotels WHERE id_hotel=?");
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM hotels WHERE id=?");
 			ps.setInt(1, id);
 			int count = ps.executeUpdate();
 			return count == 1;
@@ -148,7 +148,7 @@ public class HotelDAO {
 
 	protected Hotel processRow(ResultSet rs) throws SQLException {
 		Hotel hotel = new Hotel();
-		hotel.setId_hotel(rs.getInt("id_hotel"));
+		hotel.setId(rs.getInt("id"));
 		hotel.setName(rs.getString("name"));
 		hotel.setAddress(rs.getString("address"));
 		hotel.setStars(rs.getInt("stars"));
