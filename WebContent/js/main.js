@@ -3,7 +3,7 @@ var rootURL = "rest/hotels";
 
 var actualHotel;
 
-// Recuperar la lista de vinos cuando la aplicacion inicia 
+// Recuperar la lista de hotels cuando la aplicacion inicia 
 findAll();
 
 // Ocultar el botón de eliminar al iniciarse la aplicacion
@@ -126,7 +126,7 @@ function updateHotel() {
 	$.ajax({
 		type: 'PUT',
 		contentType: 'application/json',
-		url: rootURL + '/' + $('#vinoId').val(),
+		url: rootURL + '/' + $('#idHotel').val(),
 		dataType: "json",
 		data: formToJSON(),
 		success: function(data, textStatus, jqXHR){			
@@ -162,7 +162,7 @@ function renderList(data) {
 					(data instanceof Array ? data : [data]);
 
 	$('#listHotels a').remove();
-	$.each(list, function(index, vino) {
+	$.each(list, function(index, hotel) {
 		$('#listHotels').append('<a href="#" data-identity="' + hotel.id + '" class="list-group-item">'+ hotel.name +'</a>');
 	});
 }
