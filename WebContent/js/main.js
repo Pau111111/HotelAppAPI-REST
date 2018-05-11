@@ -52,7 +52,7 @@ $('#listHotels').delegate('a', 'click', function() {
 	$(this).addClass("active");
 });
 
-$("image").on('error', function(){ 
+$("image").on('error', function(){
   $(this).attr("src", "img/default.jpg");
 });
 

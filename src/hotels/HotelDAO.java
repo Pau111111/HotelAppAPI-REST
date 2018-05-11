@@ -111,7 +111,7 @@ public class HotelDAO {
 		try {
 			conn = ConnectionHelper.getConnection();
 			final String qry = "UPDATE hotels SET name=?, address=?, stars=?, country=?, "
-					+ "description=?, image=? WHERE id=?";
+					+ "description=?, image=? WHERE id=?"; 
 			PreparedStatement ps = conn.prepareStatement(qry);
 			ps.setString(1, hotel.getName());
 			ps.setString(2, hotel.getAddress());
