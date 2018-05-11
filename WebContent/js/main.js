@@ -52,7 +52,7 @@ $('#listHotels').delegate('a', 'click', function() {
 	$(this).addClass("active");
 });
 
-$("image").error(function(){
+$("image").on('error', function(){
   $(this).attr("src", "img/default.jpg");
 });
 
@@ -136,6 +136,7 @@ function updateHotel() {
 		data: formToJSON(),
 		success: function(data, textStatus, jqXHR){			
 			alert('Hotel actualizado correctamente');
+			findAll();
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('Error en updateHotel: ' + textStatus);
