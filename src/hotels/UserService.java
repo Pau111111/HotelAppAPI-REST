@@ -42,7 +42,7 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User create(User user) {
-		System.out.println("Creating user...");
+		System.out.println("UserServicer "+user.getEmail()+" "+user.getPass());
 		return dao.save(user);
 	}
 

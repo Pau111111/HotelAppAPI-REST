@@ -50,6 +50,30 @@ public class UserDAO {
 		}
 		return lista;
 	}
+	
+	public User login(User loginUser) {
+		String sql = "SELECT * FROM users WHERE email = ? AND pass = ?";
+		Connection conn = null;
+		User user = null;
+		System.out.println("UserDAO "+loginUser.getEmail()+"  "+loginUser.getPass());
+		try {
+			conn = ConnectionHelper.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, loginUser.getEmail());
+			ps.setString(2, loginUser.getPass());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				user = processRow(rs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			ConnectionHelper.close(conn);
+		}
+		System.out.println("UserDAO "+user.getId()+"  "+loginUser.getEmail());
+		return user;
+	}
 
 	public User findById(int id) {
 		String sql = "SELECT * FROM hotels WHERE id = ?";
