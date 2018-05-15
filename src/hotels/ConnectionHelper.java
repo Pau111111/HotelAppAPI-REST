@@ -9,7 +9,7 @@ public class ConnectionHelper {
 	
 	private String url;
 	private static ConnectionHelper instance;
-
+//hola
 	private ConnectionHelper()	{		
     	String driver = null;
 		try {			
